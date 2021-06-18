@@ -12,6 +12,7 @@ function Navigation() {
             <NavigationItem exact to={routes.HOME}>Acceuil</NavigationItem>
             <NavigationItem to={routes.ARTICLES}>Articles</NavigationItem>
             <NavigationItem to={routes.CONTACT}>Contact</NavigationItem>
+            <NavigationItem exact to={routes.AJOUTER}>Ajouter</NavigationItem>
         </ul>
     );
 }
