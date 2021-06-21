@@ -19,12 +19,12 @@ function Ajouter() {
       valid: false,
       validation: {
         required: true,
-        minLenght: 5,
-        maxLenght: 85,
+        minLength: 5,
+        maxLength: 85,
       },
       touched: false,
+      errorMessage: "Le titre doit faire entre 5 et 85 caractères.",
     },
-
     contenu: {
       elementType: "textarea",
       elementConfig: {},
@@ -33,32 +33,30 @@ function Ajouter() {
       valid: false,
       validation: {
         required: true,
-        minLenght: 5,
-        maxLenght: 85,
       },
       touched: false,
+      errorMessage: "Le contenu ne doit pas être vide.",
     },
     auteur: {
       elementType: "input",
       elementConfig: {
         type: "text",
-        placeholder: "L'auteur de l'article",
+        placeholder: "Auteur de l'article",
       },
       value: "",
-      label: "auteur",
+      label: "Auteur",
       valid: false,
       validation: {
         required: true,
-        minLenght: 5,
-        maxLenght: 85,
       },
       touched: false,
+      errorMessage: "Il doit y avoir un auteur pour cet article.",
     },
     brouillon: {
       elementType: "select",
       elementConfig: {
         options: [
-          { value: true, displayValue: "Bouillon" },
+          { value: true, displayValue: "Brouillon" },
           { value: false, displayValue: "Publié" },
         ],
       },
@@ -68,7 +66,6 @@ function Ajouter() {
       validation: {},
     },
   });
-
   const [valid, setValid] = useState(false);
 
   // Fonctions
@@ -92,21 +89,21 @@ function Ajouter() {
   };
 
   const inputChangedHandler = (event, id) => {
-    //Change la valeur
+    // Change la valeur
     const nouveauxInputs = { ...inputs };
     nouveauxInputs[id].value = event.target.value;
     nouveauxInputs[id].touched = true;
 
-    // Vérification du formulaire
-    nouveauxInputs[id].value = checkValidity(
+    // Vérification de la valeur
+    nouveauxInputs[id].valid = checkValidity(
       event.target.value,
       nouveauxInputs[id].validation
     );
+
     setInputs(nouveauxInputs);
 
-    //Vérifiaction de la valeur
+    // Vérification du formulaire
     let formIsValid = true;
-
     for (let input in nouveauxInputs) {
       formIsValid = nouveauxInputs[input].valid && formIsValid;
     }
@@ -115,6 +112,8 @@ function Ajouter() {
 
   const formHandler = (event) => {
     event.preventDefault();
+
+    console.log("test");
   };
 
   // Variable
@@ -134,7 +133,7 @@ function Ajouter() {
           label={formElement.config.label}
           type={formElement.config.elementType}
           config={formElement.config.elementConfig}
-          invalid={formElement.config.valid}
+          valid={formElement.config.valid}
           touched={formElement.config.touched}
           changed={(e) => inputChangedHandler(e, formElement.id)}
         />

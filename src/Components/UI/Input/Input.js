@@ -17,9 +17,9 @@ function Input(props) {
         <input
           {...props.config}
           value={props.value}
+          className={inputClasses}
           id={props.id}
           onChange={props.changed}
-          className={inputClasses}
         />
       );
       break;
