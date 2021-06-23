@@ -1,7 +1,7 @@
 //Librairies
 import React from 'react';
 import { Link } from 'react-router-dom';
-import routes from '../../routes';
+import routes from '../../config/routes';
 
 // import { Redirect } from 'react-router-dom'
 

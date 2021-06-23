@@ -1,11 +1,13 @@
 //Librairies
 import React, { useState } from "react";
 import classes from "./Ajouter.module.css";
+import axios from "../../../config/axios-firebase";
+import routes from "../../../config/routes";
 
 // Composants
 import Input from "../../../Components/UI/Input/Input";
 
-function Ajouter() {
+function Ajouter(props) {
   //States
   const [inputs, setInputs] = useState({
     titre: {
@@ -24,6 +26,20 @@ function Ajouter() {
       },
       touched: false,
       errorMessage: "Le titre doit faire entre 5 et 85 caractères.",
+    },
+    accroche: {
+      elementType: "textarea",
+      elementConfig: {},
+      value: "",
+      label: "Accroche de l'article",
+      valid: false,
+      validation: {
+        required: true,
+        minLength: 10,
+        maxLength: 140,
+      },
+      touched: false,
+      errorMessage: "Le contenu ne doit pas être vide et doit être comprise entre 50 et 140 caractères.",
     },
     contenu: {
       elementType: "textarea",
@@ -60,11 +76,12 @@ function Ajouter() {
           { value: false, displayValue: "Publié" },
         ],
       },
-      value: "",
+      value: true,
       label: "Etat",
       valid: true,
       validation: {},
     },
+    
   });
   const [valid, setValid] = useState(false);
 
@@ -113,7 +130,23 @@ function Ajouter() {
   const formHandler = (event) => {
     event.preventDefault();
 
-    console.log("test");
+    const article ={
+      titre: inputs.titre.value,
+      contenu: inputs.contenu.value,
+      auteur: inputs.auteur.value,
+      brouillon: inputs.brouillon.value,
+      accroche:inputs.brouillon.value,
+      date: Date.now()
+    }
+    axios
+      .post("/article.json", article)
+      .then((response) => {
+        console.log(response);
+        props.history.replace(routes.ARTICLES);
+      })
+      .catch((error) => {
+        console.log(error);
+      }); 
   };
 
   // Variable
@@ -135,6 +168,7 @@ function Ajouter() {
           config={formElement.config.elementConfig}
           valid={formElement.config.valid}
           touched={formElement.config.touched}
+          errorMessage={formElement.config.errorMessage}
           changed={(e) => inputChangedHandler(e, formElement.id)}
         />
       ))}
