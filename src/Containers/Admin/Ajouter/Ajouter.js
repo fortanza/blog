@@ -135,7 +135,7 @@ function Ajouter(props) {
       contenu: inputs.contenu.value,
       auteur: inputs.auteur.value,
       brouillon: inputs.brouillon.value,
-      accroche:inputs.brouillon.value,
+      accroche:inputs.accroche.value,
       date: Date.now()
     }
     axios

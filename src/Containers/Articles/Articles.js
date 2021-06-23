@@ -1,31 +1,43 @@
 //Librairies
-import React from 'react';
+import React,{useState, useEffect} from 'react';
+import axios from '../../config/axios-firebase';
 import { Link } from 'react-router-dom';
 import routes from '../../config/routes';
 
-// import { Redirect } from 'react-router-dom'
+// composant 
+import DisplayedArticles from '../../Components/DisplayedArticles/DisplayedArticles';
 
 function Articles(props) {
 
-    // useEffect (() => {
-    //     props.history.push("/")
+    // State
+    const [articles, setArticles] = useState ([]);
 
-    //     /*
-    //         -push : ajouter une page dans l'historique ('/')
-    //             -/
-    //             - /article
-    //             -/ car redirection
-    //         -replace: remplace une page actuel dans l'historique ('/')
-    //             -/
-    //             -/ car remplacer
-               
-    //     */
-    // }, []);
+    // ComponentDidMount
+    useEffect(() => {
+       axios.get('/article.json')
+       .then(response => {
+           const articlesArray = [];
 
+           for (let key in response.data) {
+            articlesArray.push({
+                ...response.data[key],
+                id: key
+            })
+           }
+           setArticles(articlesArray);
+        })
+       .catch(error => {console.log(error);})
+    }, [])
+    //DisplayedArticles
+        /*  <section> ... </section>
+            Contient 
+            DisplayedArticle 
+        
+        */
     return (
     <>    
     <h1>Articles</h1>
-    {/* <Redirect to="/" /> */}
+    <DisplayedArticles articles={articles} />
     <Link to={routes.CONTACT}>Contactez moi</Link>
     </>
     );
