@@ -1,0 +1,41 @@
+.lead {
+    color: rgba(0,0,0,0.5);
+    margin-bottom: 15px;
+}
+
+.content {
+    text-align: left;
+    padding: 30px;   
+}
+
+.author {
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.author span {
+    margin-left: 15px;
+    font-size: .9rem;
+}
+
+.button {
+    display: block;
+    margin-top: 30px;
+    text-align: right;
+}
+
+.button button{
+border:0;
+padding: 10px 15px;
+background-color: #fb743e;
+color: white;
+margin: 5px;
+border-radius: 5px;
+cursor: pointer;
+}
+
+.button button:focus,
+.button button:hover {
+background-color: #b3450b;
+}

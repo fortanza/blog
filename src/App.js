@@ -21,7 +21,7 @@ function App() {
           <Route exact path={routes.HOME} component={Home} />
           <Route path={routes.CONTACT} component={Contact} />
           <Route exact path={routes.ARTICLES} component={Articles} />
-          <Route exact path={routes.ARTICLES + "/:id"} component={Article} />
+          <Route exact path={routes.ARTICLES + "/:slug"} component={Article} />
           <Route exact path={routes.AJOUTER} component={Ajouter} />
           <Route render={() => <h1>Erreur 404 </h1>} />
         </Switch>

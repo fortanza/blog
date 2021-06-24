@@ -39,7 +39,8 @@ function Ajouter(props) {
         maxLength: 140,
       },
       touched: false,
-      errorMessage: "Le contenu ne doit pas être vide et doit être comprise entre 50 et 140 caractères.",
+      errorMessage:
+        "Le contenu ne doit pas être vide et doit être comprise entre 50 et 140 caractères.",
     },
     contenu: {
       elementType: "textarea",
@@ -81,7 +82,6 @@ function Ajouter(props) {
       valid: true,
       validation: {},
     },
-    
   });
   const [valid, setValid] = useState(false);
 
@@ -127,17 +127,39 @@ function Ajouter(props) {
     setValid(formIsValid);
   };
 
+  const generateSlug = (str) => {
+    str = str.replace(/^\s+|\s+$/g, ""); // trim
+    str = str.toLowerCase();
+
+    // remove accents, swap ñ for n, etc
+    var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
+    var to = "aaaaeeeeiiiioooouuuunc------";
+    for (var i = 0, l = from.length; i < l; i++) {
+      str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
+    }
+
+    str = str
+      .replace(/[^a-z0-9 -]/g, "") // remove invalid chars
+      .replace(/\s+/g, "-") // collapse whitespace and replace by -
+      .replace(/-+/g, "-"); // collapse dashes
+
+    return str;
+  }
+
   const formHandler = (event) => {
     event.preventDefault();
 
-    const article ={
+    const slug = generateSlug(inputs.titre.value);
+    
+    const article = {
       titre: inputs.titre.value,
       contenu: inputs.contenu.value,
       auteur: inputs.auteur.value,
       brouillon: inputs.brouillon.value,
-      accroche:inputs.accroche.value,
-      date: Date.now()
-    }
+      accroche: inputs.accroche.value,
+      date: Date.now(),
+      slug: slug,
+    };
     axios
       .post("/article.json", article)
       .then((response) => {
@@ -146,7 +168,7 @@ function Ajouter(props) {
       })
       .catch((error) => {
         console.log(error);
-      }); 
+      });
   };
 
   // Variable
