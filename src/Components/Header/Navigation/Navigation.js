@@ -14,7 +14,7 @@ function Navigation() {
       </NavigationItem>
       <NavigationItem to={routes.ARTICLES}>Articles</NavigationItem>
       <NavigationItem to={routes.CONTACT}>Contact</NavigationItem>
-      <NavigationItem exact to={routes.AJOUTER}>
+      <NavigationItem exact to={routes.MANAGE_ARTICLE}>
         Ajouter
       </NavigationItem>
     </ul>

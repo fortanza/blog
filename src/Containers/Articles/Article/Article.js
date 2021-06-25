@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "../../../config/axios-firebase";
 import classes from "./Article.module.css";
 import routes from "../../../config/routes";
+import { Link } from "react-router-dom";
 
 //Fontions
 
@@ -48,6 +49,14 @@ function Article(props) {
       </div>
 
       <div className={classes.button}>
+        <Link
+          to={{
+            pathname: routes.MANAGE_ARTICLE,
+            state: { article: article },
+          }}
+        >
+          <button>Modifier</button>
+        </Link>
         <button onClick={deleteclickHandler}>Supprimer</button>
       </div>
 
