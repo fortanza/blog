@@ -25,10 +25,10 @@ function Contact(props) {
         Téléphone
       </button>
 
-      <Route path={props.match.url + "/email"} render={() => <p>Email</p>} />
+      <Route path={props.match.url + "/email"} render={() => <p>johndoe@google.com</p>} />
       <Route
         path={props.match.url + "/telephone"}
-        render={() => <p>Téléphone</p>}
+        render={() => <p>06 00 00 00 00</p>}
       />
     </>
   );

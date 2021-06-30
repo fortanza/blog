@@ -16,7 +16,7 @@ function Articles(props) {
     useEffect(() => {
        axios.get('/article.json')
        .then(response => {
-           const articlesArray = [];
+           let  articlesArray = [];
 
            for (let key in response.data) {
             articlesArray.push({
@@ -24,6 +24,13 @@ function Articles(props) {
                 id: key
             })
            }
+
+           //chronologie
+           articlesArray.reverse();
+
+           //trier les artiles
+           articlesArray = articlesArray.filter(article => article.brouillon == 'false');
+
            setArticles(articlesArray);
         })
        .catch(error => {console.log(error);})

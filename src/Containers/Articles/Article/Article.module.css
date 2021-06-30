@@ -39,3 +39,11 @@ cursor: pointer;
 .button button:hover {
 background-color: #b3450b;
 }
+
+.badge {
+    font-size: 0.9rem;
+    background-color: #cccccc;
+    color: white;
+    border-radius: 4px;
+    padding: 5px 10px;
+}

@@ -18,6 +18,10 @@ function Article(props) {
         '/article.json?orderBy="slug"&equalTo="' + props.match.params.slug + '"'
       )
       .then((response) => {
+        if (Object.keys(response.data).length === 0) {
+          props.history.push(routes.HOME);
+        }
+
         for (let key in response.data) {
           setArticle({ ...response.data[key], id: key });
         }
@@ -63,6 +67,7 @@ function Article(props) {
       <div className={classes.author}>
         <b>{article.auteur}</b>
         <span>Publié le {date}</span>
+        {article.brouillon == 'true' ? <span className={classes.badge}>Brouillon</span> : null}
       </div>
     </div>
   );

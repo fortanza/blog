@@ -1,0 +1,15 @@
+.mainLink {
+    text-align: right;
+    
+}
+
+.mainLink a {
+    text-decoration: none;
+    margin-right: 15px;
+    color : #fb743e;
+}
+
+.mainLink a:focus,
+.mainLink a:hover {
+    color: #b3450b;
+}
